@@ -1,0 +1,115 @@
+{
+  "source_page": "https://vla-feedback.github.io/",
+  "retrieved_date": "2026-10-12",
+  "video_count": 12,
+  "videos": [
+    {
+      "file": "redtoy_s.mp4",
+      "task": "1D Moving Robot",
+      "method": "VLA-Feedback",
+      "url": "https://vla-feedback.github.io/static/videos/simulation/redtoy_s.mp4",
+      "bytes": 418040,
+      "sha256": "4cb09f304cb6bfe254c3e0e9087248f52fd33e52040f09532aa03ea51fc47237",
+      "content_type": "video/mp4"
+    },
+    {
+      "file": "greentoy_s.mp4",
+      "task": "2D Moving Robot",
+      "method": "VLA-Feedback",
+      "url": "https://vla-feedback.github.io/static/videos/simulation/greentoy_s.mp4",
+      "bytes": 364748,
+      "sha256": "5ef3809fff887b502be6706cbbd319d38d7a0f303e653f32f3c86ba184d11421",
+      "content_type": "video/mp4"
+    },
+    {
+      "file": "dropball_s.mp4",
+      "task": "Drop Ball to Cup",
+      "method": "VLA-Feedback",
+      "url": "https://vla-feedback.github.io/static/videos/simulation/dropball_s.mp4",
+      "bytes": 2231507,
+      "sha256": "114b3e95a22b8342ff49a1bdf4213d7a20daad814e85f81438adcb892a8ce960",
+      "content_type": "video/mp4"
+    },
+    {
+      "file": "redtoy_f.mp4",
+      "task": "1D Moving Robot",
+      "method": "GR00T",
+      "url": "https://vla-feedback.github.io/static/videos/simulation/redtoy_f.mp4",
+      "bytes": 489510,
+      "sha256": "5e8d199ecf3703394a1094ffcfad32ea8f87a820404f58c1ad395d7c4df8fb40",
+      "content_type": "video/mp4"
+    },
+    {
+      "file": "greentoy_f.mp4",
+      "task": "2D Moving Robot",
+      "method": "GR00T",
+      "url": "https://vla-feedback.github.io/static/videos/simulation/greentoy_f.mp4",
+      "bytes": 451971,
+      "sha256": "e530377e7aff8da3e4a4a49d3f6a3b1d59ca67e2c89d5c6896d7720fc4db9920",
+      "content_type": "video/mp4"
+    },
+    {
+      "file": "dropball_f.mp4",
+      "task": "Drop Ball to Cup",
+      "method": "GR00T",
+      "url": "https://vla-feedback.github.io/static/videos/simulation/dropball_f.mp4",
+      "bytes": 3537118,
+      "sha256": "968e3511e8cac0f288246da784635fd89828d2e9573d1dce1d087203c6792e4f",
+      "content_type": "video/mp4"
+    },
+    {
+      "file": "catchblock_s.mp4",
+      "task": "Catch Block (unseen)",
+      "method": "VLA-Feedback",
+      "url": "https://vla-feedback.github.io/static/videos/simulation/catchblock_s.mp4",
+      "bytes": 5243060,
+      "sha256": "cc5abbdb2e9a3005887feaee97feda034670400c35ff37fbefd66d9b3db4c06e",
+      "content_type": "video/mp4"
+    },
+    {
+      "file": "redtoyspeed_s.mp4",
+      "task": "1D Robot Speed (unseen)",
+      "method": "VLA-Feedback",
+      "url": "https://vla-feedback.github.io/static/videos/simulation/redtoyspeed_s.mp4",
+      "bytes": 384823,
+      "sha256": "96f74d4630aed6790203c2977fc7ecc54578157192592477fc6428805f1ed690",
+      "content_type": "video/mp4"
+    },
+    {
+      "file": "dropballcolor_s.mp4",
+      "task": "Drop Ball Color (unseen)",
+      "method": "VLA-Feedback",
+      "url": "https://vla-feedback.github.io/static/videos/simulation/dropballcolor_s.mp4",
+      "bytes": 2216122,
+      "sha256": "6bf24b736fa4e1e29e6090dd91547b943d8ceca14bd0ba9e967153029da3096d",
+      "content_type": "video/mp4"
+    },
+    {
+      "file": "catchblock_f.mp4",
+      "task": "Catch Block (unseen)",
+      "method": "GR00T",
+      "url": "https://vla-feedback.github.io/static/videos/simulation/catchblock_f.mp4",
+      "bytes": 20424311,
+      "sha256": "28d4567625bb37f412797180142208533636917b7e04aa2ce7739044e881af8a",
+      "content_type": "video/mp4"
+    },
+    {
+      "file": "redtoyspeed_f.mp4",
+      "task": "1D Robot Speed (unseen)",
+      "method": "GR00T",
+      "url": "https://vla-feedback.github.io/static/videos/simulation/redtoyspeed_f.mp4",
+      "bytes": 350846,
+      "sha256": "05ea6c9b40fc5fac664ead49b25a49d7945db3856573f44219df60d25b719d2e",
+      "content_type": "video/mp4"
+    },
+    {
+      "file": "dropballcolor_f.mp4",
+      "task": "Drop Ball Color (unseen)",
+      "method": "GR00T",
+      "url": "https://vla-feedback.github.io/static/videos/simulation/dropballcolor_f.mp4",
+      "bytes": 8699661,
+      "sha256": "b7337cf211b14fe49df4dd211ec733cca4c307246e57ca16bb85b8fb158d0cda",
+      "content_type": "video/mp4"
+    }
+  ]
+}

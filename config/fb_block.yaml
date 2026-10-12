@@ -1,0 +1,58 @@
+# ============================================================================
+# Mode Selection (REQUIRED for Stage 2 training)
+# ============================================================================
+feedback: true  # Stage 2: freeze backbone/APP, train VRN (legacy checkpoint keys retained)
+
+# ============================================================================
+# Dataset Configuration
+# ============================================================================
+dataset_path: "./demo_data/pick_up_the_block_data"
+data_config: "libero_arm_obs"  
+
+# ============================================================================
+# Training Configuration
+# ============================================================================
+output_dir: "./checkpoints/cp_block_obs_resnet"
+num_gpus: 1
+max_steps: 50000
+save_steps: 5000
+batch_size: 32
+
+# ============================================================================
+# Model Configuration
+# ============================================================================
+# base_model_path: "nvidia/GR00T-N1.5-3B"
+base_model_path: "./checkpoints/cp_block_obs_resnet/checkpoint-5000"
+
+resume: true  # Set to true to resume from checkpoint
+
+# Tuning parameters (defaults to stage 1: projector + diffusion only)
+tune_llm: false
+tune_visual: false
+tune_projector: true
+tune_diffusion_model: true
+
+# ============================================================================
+# Data Loading Configuration
+# ============================================================================
+video_backend: "torchvision_av"  # Options: torchcodec, decord, torchvision_av
+embodiment_tag: "libero_arm"  # Will be set based on dataset
+
+# ============================================================================
+# Advanced Training Parameters (Optional - uncomment to customize)
+# ============================================================================
+learning_rate: 0.0001
+weight_decay: 0.00001
+warmup_ratio: 0.05
+gradient_accumulation_steps: 1
+dataloader_num_workers: 12
+dataloader_prefetch_factor: 4
+report_to: "wandb"  # Options: wandb, tensorboard, azure_ml
+
+# ============================================================================
+# LORA Configuration (Optional)
+# ============================================================================
+lora_rank: 0  # Set to > 0 to enable LORA fine-tuning
+# lora_alpha: 16
+# lora_dropout: 0.1
+# lora_full_model: false

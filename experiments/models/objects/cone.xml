@@ -1,0 +1,87 @@
+<!--
+  Cone: yellow tapered cylinder with one end smaller than the other.
+
+  Built as a stack of cylinder slices along the local Z axis, with radius
+  decreasing linearly from 0.028 (z = -0.065, "big end") to 0.018 (z = +0.065,
+  "small end"). Total length 0.13 — same as the soda can.
+
+  When laid on its side and placed on a slope, the unequal-radius ends roll
+  unequal arcs per rotation, so the cone traces a circular arc rather than a
+  straight line. The small end is the inner pivot of that arc.
+
+  Following robosuite convention: each slice has a paired group="0" collision
+  geom (transparent) and group="1" visual geom (no contacts).
+-->
+<mujoco model="cone">
+  <worldbody>
+    <body>
+      <body name="object">
+        <!-- Collision slices (group=0, transparent) -->
+        <geom name="seg0_col" type="cylinder" size="0.0275 0.0065" pos="0 0 -0.0585"
+              rgba="0.95 0.45 0.10 0.0" density="400" friction="0.8 0.01 0.001"
+              solimp="0.99 0.999 0.001" solref="0.005 1" group="0" condim="3"/>
+        <geom name="seg1_col" type="cylinder" size="0.0265 0.0065" pos="0 0 -0.0455"
+              rgba="0.95 0.45 0.10 0.0" density="400" friction="0.8 0.01 0.001"
+              solimp="0.99 0.999 0.001" solref="0.005 1" group="0" condim="3"/>
+        <geom name="seg2_col" type="cylinder" size="0.0255 0.0065" pos="0 0 -0.0325"
+              rgba="0.95 0.45 0.10 0.0" density="400" friction="0.8 0.01 0.001"
+              solimp="0.99 0.999 0.001" solref="0.005 1" group="0" condim="3"/>
+        <geom name="seg3_col" type="cylinder" size="0.0245 0.0065" pos="0 0 -0.0195"
+              rgba="0.95 0.45 0.10 0.0" density="400" friction="0.8 0.01 0.001"
+              solimp="0.99 0.999 0.001" solref="0.005 1" group="0" condim="3"/>
+        <geom name="seg4_col" type="cylinder" size="0.0235 0.0065" pos="0 0 -0.0065"
+              rgba="0.95 0.45 0.10 0.0" density="400" friction="0.8 0.01 0.001"
+              solimp="0.99 0.999 0.001" solref="0.005 1" group="0" condim="3"/>
+        <geom name="seg5_col" type="cylinder" size="0.0225 0.0065" pos="0 0 0.0065"
+              rgba="0.95 0.45 0.10 0.0" density="400" friction="0.8 0.01 0.001"
+              solimp="0.99 0.999 0.001" solref="0.005 1" group="0" condim="3"/>
+        <geom name="seg6_col" type="cylinder" size="0.0215 0.0065" pos="0 0 0.0195"
+              rgba="0.95 0.45 0.10 0.0" density="400" friction="0.8 0.01 0.001"
+              solimp="0.99 0.999 0.001" solref="0.005 1" group="0" condim="3"/>
+        <geom name="seg7_col" type="cylinder" size="0.0205 0.0065" pos="0 0 0.0325"
+              rgba="0.95 0.45 0.10 0.0" density="400" friction="0.8 0.01 0.001"
+              solimp="0.99 0.999 0.001" solref="0.005 1" group="0" condim="3"/>
+        <geom name="seg8_col" type="cylinder" size="0.0195 0.0065" pos="0 0 0.0455"
+              rgba="0.95 0.45 0.10 0.0" density="400" friction="0.8 0.01 0.001"
+              solimp="0.99 0.999 0.001" solref="0.005 1" group="0" condim="3"/>
+        <geom name="seg9_col" type="cylinder" size="0.0185 0.0065" pos="0 0 0.0585"
+              rgba="0.95 0.45 0.10 0.0" density="400" friction="0.8 0.01 0.001"
+              solimp="0.99 0.999 0.001" solref="0.005 1" group="0" condim="3"/>
+
+        <!-- Visual slices (group=1, no contact) -->
+        <geom name="seg0_vis" type="cylinder" size="0.0275 0.0065" pos="0 0 -0.0585"
+              rgba="0.95 0.45 0.10 1.0" contype="0" conaffinity="0" group="1"/>
+        <geom name="seg1_vis" type="cylinder" size="0.0265 0.0065" pos="0 0 -0.0455"
+              rgba="0.95 0.45 0.10 1.0" contype="0" conaffinity="0" group="1"/>
+        <geom name="seg2_vis" type="cylinder" size="0.0255 0.0065" pos="0 0 -0.0325"
+              rgba="0.95 0.45 0.10 1.0" contype="0" conaffinity="0" group="1"/>
+        <geom name="seg3_vis" type="cylinder" size="0.0245 0.0065" pos="0 0 -0.0195"
+              rgba="0.95 0.45 0.10 1.0" contype="0" conaffinity="0" group="1"/>
+        <geom name="seg4_vis" type="cylinder" size="0.0235 0.0065" pos="0 0 -0.0065"
+              rgba="0.95 0.45 0.10 1.0" contype="0" conaffinity="0" group="1"/>
+        <geom name="seg5_vis" type="cylinder" size="0.0225 0.0065" pos="0 0 0.0065"
+              rgba="0.95 0.45 0.10 1.0" contype="0" conaffinity="0" group="1"/>
+        <geom name="seg6_vis" type="cylinder" size="0.0215 0.0065" pos="0 0 0.0195"
+              rgba="0.95 0.45 0.10 1.0" contype="0" conaffinity="0" group="1"/>
+        <geom name="seg7_vis" type="cylinder" size="0.0205 0.0065" pos="0 0 0.0325"
+              rgba="0.95 0.45 0.10 1.0" contype="0" conaffinity="0" group="1"/>
+        <geom name="seg8_vis" type="cylinder" size="0.0195 0.0065" pos="0 0 0.0455"
+              rgba="0.95 0.45 0.10 1.0" contype="0" conaffinity="0" group="1"/>
+        <geom name="seg9_vis" type="cylinder" size="0.0185 0.0065" pos="0 0 0.0585"
+              rgba="0.95 0.45 0.10 1.0" contype="0" conaffinity="0" group="1"/>
+
+        <!-- End caps (visual only) -->
+        <geom name="big_cap" type="cylinder" size="0.0283 0.003" pos="0 0 -0.062"
+              rgba="0.95 0.45 0.10 1.0"
+              contype="0" conaffinity="0" group="1"/>
+        <geom name="small_cap" type="cylinder" size="0.0185 0.003" pos="0 0 0.062"
+              rgba="0.95 0.45 0.10 1.0"
+              contype="0" conaffinity="0" group="1"/>
+      </body>
+
+      <site name="bottom_site" pos="0 0 -0.065" rgba="0 0 0 0" size="0.005"/>
+      <site name="top_site" pos="0 0 0.065" rgba="0 0 0 0" size="0.005"/>
+      <site name="horizontal_radius_site" pos="0.028 0.028 0" rgba="0 0 0 0" size="0.005"/>
+    </body>
+  </worldbody>
+</mujoco>

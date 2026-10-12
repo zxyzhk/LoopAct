@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Simple open-top square cup built from box primitives.
+
+  Geometry (origin at center of base footprint, z=0 = bottom of cup):
+    outer footprint   8 cm x 8 cm
+    inner footprint   7 cm x 7 cm  (well over a 5 cm ball diameter)
+    total height      4 cm
+    base thickness    0.5 cm
+    wall thickness    0.5 cm
+
+  Each surface has two geoms following robosuite convention:
+    - group="1" colored geoms (rendering only)
+    - group="0" transparent geoms (collision only)
+-->
+<mujoco model="cup">
+  <worldbody>
+    <body>
+      <body name="object">
+        <inertial pos="0 0 0.02" mass="0.05" diaginertia="0.0001 0.0001 0.0001"/>
+        <site name="origin" pos="0 0 0" rgba="0 0 0 0" size="0.005"/>
+
+        <!-- Base (visual) -->
+        <geom name="cup_base_visual"
+          pos="0 0 0.0025"
+          size="0.04 0.04 0.0025" type="box"
+          group="1" contype="0" conaffinity="0"
+          rgba="0.20 0.65 0.85 1.0"/>
+        <!-- Base (collision) -->
+        <geom name="cup_base"
+          pos="0 0 0.0025"
+          size="0.04 0.04 0.0025" type="box"
+          group="0" rgba="0 0 0 0"
+          friction="1.0 0.05 0.001"/>
+
+        <!-- +X wall -->
+        <geom name="cup_wall_xp_visual"
+          pos="0.0375 0 0.0225"
+          size="0.0025 0.04 0.0175" type="box"
+          group="1" contype="0" conaffinity="0"
+          rgba="0.20 0.65 0.85 1.0"/>
+        <geom name="cup_wall_xp"
+          pos="0.0375 0 0.0225"
+          size="0.0025 0.04 0.0175" type="box"
+          group="0" rgba="0 0 0 0"
+          friction="1.0 0.05 0.001"/>
+
+        <!-- -X wall -->
+        <geom name="cup_wall_xn_visual"
+          pos="-0.0375 0 0.0225"
+          size="0.0025 0.04 0.0175" type="box"
+          group="1" contype="0" conaffinity="0"
+          rgba="0.20 0.65 0.85 1.0"/>
+        <geom name="cup_wall_xn"
+          pos="-0.0375 0 0.0225"
+          size="0.0025 0.04 0.0175" type="box"
+          group="0" rgba="0 0 0 0"
+          friction="1.0 0.05 0.001"/>
+
+        <!-- +Y wall (shorter to avoid overlap with X walls in collision) -->
+        <geom name="cup_wall_yp_visual"
+          pos="0 0.0375 0.0225"
+          size="0.035 0.0025 0.0175" type="box"
+          group="1" contype="0" conaffinity="0"
+          rgba="0.20 0.65 0.85 1.0"/>
+        <geom name="cup_wall_yp"
+          pos="0 0.0375 0.0225"
+          size="0.035 0.0025 0.0175" type="box"
+          group="0" rgba="0 0 0 0"
+          friction="1.0 0.05 0.001"/>
+
+        <!-- -Y wall -->
+        <geom name="cup_wall_yn_visual"
+          pos="0 -0.0375 0.0225"
+          size="0.035 0.0025 0.0175" type="box"
+          group="1" contype="0" conaffinity="0"
+          rgba="0.20 0.65 0.85 1.0"/>
+        <geom name="cup_wall_yn"
+          pos="0 -0.0375 0.0225"
+          size="0.035 0.0025 0.0175" type="box"
+          group="0" rgba="0 0 0 0"
+          friction="1.0 0.05 0.001"/>
+      </body>
+
+      <site name="bottom_site" pos="0 0 0" rgba="0 0 0 0" size="0.005"/>
+      <site name="top_site" pos="0 0 0.04" rgba="0 0 0 0" size="0.005"/>
+      <site name="horizontal_radius_site" pos="0 0.04 0" rgba="0 0 0 0" size="0.003"/>
+    </body>
+  </worldbody>
+</mujoco>

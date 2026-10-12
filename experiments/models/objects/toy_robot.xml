@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Toy robot built from MuJoCo primitives.
+     ~15 cm tall — tabletop toy scale.
+     Facing -Y direction, origin at centre-bottom. -->
+
+<mujoco model="toy_robot">
+  <worldbody>
+    <body name="base">
+
+    <body name="object">
+      <inertial pos="0 0 0.082" mass="0.20" diaginertia="0.0003 0.0002 0.0002"/>
+      <site name="origin" pos="0 0 0" rgba="0 0 0 0" size="0.005"/>
+
+      <!-- === Collision geometry (invisible, group 0) === -->
+      <geom name="toybot_collision" pos="0 0 0.081" size="0.030 0.018 0.081" type="box"
+        group="0" friction="2.0 0.01 0.001" rgba="0 0 0 0"/>
+
+      <!-- === Visual geometries (non-colliding, group 1) === -->
+
+      <!-- Torso -->
+      <geom name="torso" pos="0 0 0.082" size="0.036 0.024 0.036" type="box"
+        group="1" contype="0" conaffinity="0" rgba="0.20 0.60 0.80 1"/>
+
+      <!-- Chest plate (front panel, facing -Y) -->
+      <geom name="chest_plate" pos="0 -0.026 0.082" size="0.034 0.0018 0.025" type="box"
+        group="1" contype="0" conaffinity="0" rgba="0.65 0.65 0.70 1"/>
+
+      <!-- Chest buttons -->
+      <geom name="btn_red"    pos=" 0.010 -0.030 0.090" size="0.004" type="sphere"
+        group="1" contype="0" conaffinity="0" rgba="0.90 0.15 0.10 1"/>
+      <geom name="btn_green"  pos="-0.010 -0.030 0.090" size="0.004" type="sphere"
+        group="1" contype="0" conaffinity="0" rgba="0.10 0.80 0.20 1"/>
+      <geom name="btn_yellow" pos="0 -0.030 0.078" size="0.004" type="sphere"
+        group="1" contype="0" conaffinity="0" rgba="0.95 0.85 0.10 1"/>
+
+      <!-- Head -->
+      <geom name="head" pos="0 0 0.140" size="0.029 0.018 0.022" type="box"
+        group="1" contype="0" conaffinity="0" rgba="0.25 0.65 0.85 1"/>
+
+      <!-- Visor / face plate (facing -Y) -->
+      <geom name="visor" pos="0 -0.020 0.144" size="0.024 0.0018 0.013" type="box"
+        group="1" contype="0" conaffinity="0" rgba="0.15 0.15 0.20 0.8"/>
+
+      <!-- Eyes -->
+      <geom name="eye_l" pos=" 0.010 -0.024 0.146" size="0.0054" type="sphere"
+        group="1" contype="0" conaffinity="0" rgba="1.0 1.0 1.0 1"/>
+      <geom name="eye_r" pos="-0.010 -0.024 0.146" size="0.0054" type="sphere"
+        group="1" contype="0" conaffinity="0" rgba="1.0 1.0 1.0 1"/>
+
+      <!-- Pupils -->
+      <geom name="pupil_l" pos=" 0.010 -0.027 0.146" size="0.0026" type="sphere"
+        group="1" contype="0" conaffinity="0" rgba="0.10 0.10 0.10 1"/>
+      <geom name="pupil_r" pos="-0.010 -0.027 0.146" size="0.0026" type="sphere"
+        group="1" contype="0" conaffinity="0" rgba="0.10 0.10 0.10 1"/>
+
+      <!-- Mouth -->
+      <geom name="mouth" pos="0 -0.020 0.132" size="0.011 0.0018 0.0018" type="box"
+        group="1" contype="0" conaffinity="0" rgba="0.30 0.30 0.30 1"/>
+
+      <!-- Left arm (robot-left = +X when facing -Y) -->
+      <geom name="arm_l" fromto="0.037 0 0.094 0.062 0 0.079" size="0.009"
+        type="cylinder" group="1" contype="0" conaffinity="0" rgba="0.18 0.55 0.75 1"/>
+      <geom name="hand_l" pos="0.068 0 0.076" size="0.007 0.011 0.011" type="box"
+        group="1" contype="0" conaffinity="0" rgba="0.25 0.25 0.28 1"/>
+
+      <!-- Right arm (robot-right = -X when facing -Y) -->
+      <geom name="arm_r" fromto="-0.037 0 0.094 -0.062 0 0.079" size="0.009"
+        type="cylinder" group="1" contype="0" conaffinity="0" rgba="0.18 0.55 0.75 1"/>
+      <geom name="hand_r" pos="-0.068 0 0.076" size="0.007 0.011 0.011" type="box"
+        group="1" contype="0" conaffinity="0" rgba="0.25 0.25 0.28 1"/>
+
+      <!-- Left leg -->
+      <body name="leg_l_body" pos="0.014 0 0.046">
+        <geom name="leg_l" fromto="0 0 0 0 0 -0.031" size="0.011"
+          type="cylinder" group="1" contype="0" conaffinity="0" rgba="0.18 0.55 0.75 1"/>
+        <geom name="foot_l" pos="0 -0.007 -0.037" size="0.014 0.018 0.007" type="box"
+          group="1" contype="0" conaffinity="0" rgba="0.25 0.25 0.28 1"/>
+      </body>
+
+      <!-- Right leg -->
+      <body name="leg_r_body" pos="-0.014 0 0.046">
+        <geom name="leg_r" fromto="0 0 0 0 0 -0.031" size="0.011"
+          type="cylinder" group="1" contype="0" conaffinity="0" rgba="0.18 0.55 0.75 1"/>
+        <geom name="foot_r" pos="0 -0.007 -0.037" size="0.014 0.018 0.007" type="box"
+          group="1" contype="0" conaffinity="0" rgba="0.25 0.25 0.28 1"/>
+      </body>
+
+    </body>
+
+    <site name="bottom_site"            pos="0 0 0"     rgba="0 0 0 0" size="0.005"/>
+    <site name="top_site"               pos="0 0 0.162"  rgba="0 0 0 0" size="0.005"/>
+    <site name="horizontal_radius_site" pos="0.068 0 0" rgba="0 0 0 0" size="0.003"/>
+
+    </body>
+  </worldbody>
+</mujoco>

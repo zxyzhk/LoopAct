@@ -1,0 +1,38 @@
+<mujoco model="soda_can">
+  <worldbody>
+    <body>
+      <body name="object">
+        <!-- Collision geom (invisible) -->
+        <geom name="body_col" type="cylinder" size="0.028 0.065"
+              pos="0 0 0"
+              rgba="0.8 0.1 0.1 0.0"
+              density="400"
+              friction="0.8 0.01 0.001"
+              solimp="0.99 0.999 0.001" solref="0.005 1"
+              group="0" condim="3"/>
+
+        <!-- Visual red can body -->
+        <geom name="body_vis" type="cylinder" size="0.028 0.065"
+              pos="0 0 0"
+              rgba="0.8 0.1 0.1 1.0"
+              contype="0" conaffinity="0" group="1"/>
+
+        <!-- Silver top lid (visual only) -->
+        <geom name="top_lid" type="cylinder" size="0.0283 0.003"
+              pos="0 0 0.062"
+              rgba="0.75 0.75 0.78 1.0"
+              contype="0" conaffinity="0" group="1"/>
+
+        <!-- Silver bottom lid (visual only) -->
+        <geom name="bottom_lid" type="cylinder" size="0.0283 0.003"
+              pos="0 0 -0.062"
+              rgba="0.75 0.75 0.78 1.0"
+              contype="0" conaffinity="0" group="1"/>
+      </body>
+
+      <site name="bottom_site" pos="0 0 -0.065" rgba="0 0 0 0" size="0.005"/>
+      <site name="top_site" pos="0 0 0.065" rgba="0 0 0 0" size="0.005"/>
+      <site name="horizontal_radius_site" pos="0.028 0.028 0" rgba="0 0 0 0" size="0.005"/>
+    </body>
+  </worldbody>
+</mujoco>

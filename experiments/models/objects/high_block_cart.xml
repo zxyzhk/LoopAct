@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Visual cart for HighBlock: cart geometry from big_cart.xml at 1:1 scale.
+     Only the tiny anchor at +y edge is a real collision geom (gives body mass/inertia).
+     Everything else is visual-only (contype=0, density=0).
+     Anchor is at the far +y rim, outside the robot's picking reach. -->
+
+<mujoco model="high_block_cart">
+  <worldbody>
+    <body name="base">
+
+      <body name="object">
+        <site name="origin" pos="0 0 0" rgba="0 0 0 0" size="0.005"/>
+
+        <!-- Full-width invisible pedestal — same as big_cart.xml truck_collision.
+             Provides solid table contact across the whole cart footprint. -->
+        <geom name="pedestal" pos="0 0 0.013" size="0.05 0.12 0.013" type="box"
+          group="0" density="50" friction="1 0.005 0.0001" rgba="0 0 0 0"/>
+
+        <!-- Visual platform slab -->
+        <geom name="cart_body" pos="0 0 0.022" size="0.05 0.12 0.004" type="box"
+          group="1" contype="0" conaffinity="0" density="0" rgba="0.70 0.70 0.70 1"/>
+
+        <!-- Rim strips -->
+        <geom name="rim_left"  pos=" 0.051 0 0.029" size="0.001 0.121 0.003" type="box"
+          group="1" contype="0" conaffinity="0" density="0" rgba="0.82 0.82 0.82 1"/>
+        <geom name="rim_right" pos="-0.051 0 0.029" size="0.001 0.121 0.003" type="box"
+          group="1" contype="0" conaffinity="0" density="0" rgba="0.82 0.82 0.82 1"/>
+        <geom name="rim_front" pos="0  0.121 0.029" size="0.052 0.001 0.003" type="box"
+          group="1" contype="0" conaffinity="0" density="0" rgba="0.82 0.82 0.82 1"/>
+        <geom name="rim_rear"  pos="0 -0.121 0.029" size="0.052 0.001 0.003" type="box"
+          group="1" contype="0" conaffinity="0" density="0" rgba="0.82 0.82 0.82 1"/>
+
+        <!-- Wheels (radius=0.022, centre z=0.022, bottom at z=0) -->
+        <geom name="wheel_fl" fromto=" 0.050 0.090 0.022  0.062 0.090 0.022" size="0.022"
+          type="cylinder" group="1" contype="0" conaffinity="0" density="0" rgba="0.4 0.4 0.4 1"/>
+        <geom name="wheel_fr" fromto="-0.050 0.090 0.022 -0.062 0.090 0.022" size="0.022"
+          type="cylinder" group="1" contype="0" conaffinity="0" density="0" rgba="0.4 0.4 0.4 1"/>
+        <geom name="wheel_rl" fromto=" 0.050 -0.090 0.022  0.062 -0.090 0.022" size="0.022"
+          type="cylinder" group="1" contype="0" conaffinity="0" density="0" rgba="0.4 0.4 0.4 1"/>
+        <geom name="wheel_rr" fromto="-0.050 -0.090 0.022 -0.062 -0.090 0.022" size="0.022"
+          type="cylinder" group="1" contype="0" conaffinity="0" density="0" rgba="0.4 0.4 0.4 1"/>
+
+      </body>
+
+      <site name="bottom_site"            pos="0 0 0"     rgba="0 0 0 0" size="0.005"/>
+      <site name="top_site"               pos="0 0 0.044"  rgba="0 0 0 0" size="0.005"/>
+      <site name="horizontal_radius_site" pos="0.05 0 0"  rgba="0 0 0 0" size="0.003"/>
+
+    </body>
+  </worldbody>
+</mujoco>

@@ -1,0 +1,144 @@
+#!/usr/bin/env python3
+"""
+ToyGreen Environment - Same as ToyRedEnv but with a green-coloured figurine.
+"""
+
+import sys
+import os
+_current_dir = os.path.dirname(os.path.abspath(__file__))
+_robosuite_dir = os.path.dirname(_current_dir)
+sys.path.insert(0, _robosuite_dir)
+
+import numpy as np
+from robosuite.environments.base import register_env
+from robosuite.models.tasks import Task
+from robosuite.models.objects.primitive import BoxObject, BallObject
+from xml_objects import ToyRobotGreenObject, ToyCartObject
+from environment.ToyRobotEnv import ToyRobot
+
+
+class ToyGreen(ToyRobot):
+    """ToyRobot environment with a green figurine instead of the default blue one."""
+
+    OBJECT_POS_NOISE_XY = 0.03
+    ROBOT_QPOS_NOISE = 0.03
+
+    def _load_model(self):
+        # Call grandparent to set up arena and robot, skipping ToyRobot._load_model
+        from robosuite.environments.manipulation.manipulation_env import ManipulationEnv
+        from robosuite.models.arenas import TableArena
+        from robosuite.utils.mjcf_utils import find_elements, new_element
+
+        ManipulationEnv._load_model(self)
+
+        self.table_offset = np.array((0.0, 0, 0.757))
+        self.robot_base_z = 0.875  # keep arm at original height independent of table
+        self.table_size = np.array((1.3, 2.0, 0.05))
+        arena = TableArena(
+            table_full_size=self.table_size,
+            table_offset=self.table_offset,
+            has_legs=True
+        )
+        arena.set_origin([0.0, 0.0, 0.0])
+        arena.worldbody.append(
+            new_element(
+                "camera",
+                name="custom_view",
+                mode="fixed",
+                pos="-1.67298636 0.79797356 1.75123554",
+                quat="-0.44254917 -0.29815212 0.47254251 0.70139798",
+                fovy="50",
+            )
+        )
+
+        table_surface_z = self.table_offset[2]                        # 0.757 — actual table surface
+        table_top_z     = table_surface_z + self.table_size[2] / 2  # 0.782 — matches HighBlockEnv
+
+        toybot_obj = ToyRobotGreenObject(name="toybot")
+
+        # Distractor cluster on the right side of the table (away from toybot's path)
+        cart_obj = ToyCartObject(name="cart")
+        # cart platform top at local z=0.016; green box centre = 0.016 + half_z(0.025)
+        green_box_obj = BoxObject(
+            name="green_box",
+            size=[0.025, 0.025, 0.025],
+            rgba=[0.55, 0.10, 0.75, 1.0],
+            density=500,
+            friction=(1.5, 0.01, 0.001),
+        )
+        blue_box_obj = BoxObject(
+            name="blue_box",
+            size=[0.025, 0.025, 0.025],
+            rgba=[0.15, 0.30, 0.90, 1.0],
+            density=500,
+            friction=(1.5, 0.01, 0.001),
+        )
+        orange_ball_obj = BallObject(
+            name="orange_ball",
+            size=[0.038],
+            rgba=[0.95, 0.50, 0.05, 1.0],
+            density=500,
+            friction=(1.5, 0.01, 0.001),
+        )
+
+        # 30° counter-clockwise around Z: quat [w, x, y, z], negate z for CCW
+        _rot30z_ccw = f"{np.cos(np.pi/12):.6f} 0 0 {-np.sin(np.pi/12):.6f}"
+        _object_quats = {"cart": _rot30z_ccw, "green_box": _rot30z_ccw}
+
+        cart_x, cart_y = -0.4, 0.4
+        objects = [
+            # toybot body at table_top_z (0.782): collision geom bottom = 0.782, falls 2.5 cm,
+            # settles with same COM as HighBlock (both: geom centre 0.871 → settles to 0.846).
+            ("toybot",      toybot_obj,      f"-0.10  0.20 {table_top_z:.4f}"),
+            # Distractors placed at actual table surface; absolute positions unchanged.
+            ("cart",        cart_obj,        f"{cart_x}  {cart_y}  {table_surface_z:.4f}"),
+            ("green_box",   green_box_obj,   f"{cart_x}  {cart_y}  {table_surface_z + 0.041:.4f}"),  # on cart
+            ("blue_box",    blue_box_obj,    f"-0.5   0.10  {table_surface_z + 0.025:.4f}"),          # right side
+            ("orange_ball", orange_ball_obj, f"-0.08   0.4  {table_surface_z + 0.025:.4f}"),          # nearby
+        ]
+
+        self.object_joints = {}
+
+        for obj_name, obj, position in objects:
+            obj_xml = obj.get_obj()
+            obj_xml.set("pos", position)
+            if obj_name in _object_quats:
+                obj_xml.set("quat", _object_quats[obj_name])
+
+            pos_array = np.array([float(x) for x in position.split()])
+            self.object_base_positions[obj_name] = pos_array
+
+            joint_name = None
+            joints = getattr(obj, "joints", None)
+            if joints:
+                if isinstance(joints[0], str):
+                    joint_name = joints[0]
+                else:
+                    joint_names = getattr(obj, "joint_names", None)
+                    if joint_names:
+                        joint_name = joint_names[0]
+
+            setattr(self, f"{obj_name}_joint", joint_name)
+            self.object_joints[obj_name] = joint_name
+
+        robot_model = self.robots[0].robot_model
+        root_body_name = robot_model.root_body
+        if root_body_name:
+            body_elements = find_elements(
+                root=robot_model.root,
+                tags="body",
+                attribs={"name": root_body_name},
+                return_first=True
+            )
+            if body_elements is not None:
+                body_elements.set("pos", f"-0.78 0.0 {self.robot_base_z}")
+
+        mujoco_objects = [obj for _, obj, _ in objects]
+        self.model = Task(
+            mujoco_arena=arena,
+            mujoco_robots=self.robots[0].robot_model,
+            mujoco_objects=mujoco_objects,
+        )
+
+
+register_env(ToyGreen)

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cart with blue block on top — single rigid body, free joint at origin (table surface level).
+     Cart geometry identical to toy_cart.xml.
+     Block: same x/y collision footprint as toy_robot_red (0.05 x 0.02), height sized so
+     that total height above table surface equals toy_robot_red height above table_top_z:
+       toy_robot_red: placed at table_top_z=0.782, top at 0.960  (height above table surface = 0.203m)
+       this object:   placed at table_surface_z=0.757, cart top at 0.773, block top at 0.960
+       => block full height = 0.187m, half-z = 0.0935, center at local z = 0.1095
+-->
+<mujoco model="block_on_cart">
+  <worldbody>
+    <body name="base">
+
+      <body name="object">
+        <inertial pos="0 0 0.10" mass="0.6" diaginertia="0.001 0.002 0.002"/>
+        <site name="origin" pos="0 0 0" rgba="0 0 0 0" size="0.005"/>
+
+        <!-- === Block collision: same footprint as toy_robot_red collision box === -->
+        <geom name="block_collision" pos="0 0 0.1095" size="0.05 0.02 0.0935" type="box"
+          group="0" density="500" friction="2.0 0.01 0.001"
+          solref="0.02 1.0" solimp="0.9 0.95 0.001" rgba="0 0 0 0"/>
+
+        <!-- === Block visual (blue) === -->
+        <geom name="block_visual" pos="0 0 0.1095" size="0.05 0.02 0.0935" type="box"
+          group="1" contype="0" conaffinity="0" density="0" rgba="0.15 0.30 0.90 1"/>
+
+        <!-- === Cart platform (from toy_cart.xml) === -->
+        <geom name="cart_collision" pos="0 0 0.008" size="0.05 0.12 0.008" type="box"
+          group="0" friction="1 0.005 0.0001" rgba="0 0 0 0"/>
+        <geom name="cart_body" pos="0 0 0.008" size="0.05 0.12 0.008" type="box"
+          group="1" contype="0" conaffinity="0" rgba="0.35 0.35 0.35 1"/>
+
+        <!-- Rim -->
+        <geom name="rim_left"  pos=" 0.051 0 0.019" size="0.001 0.121 0.003" type="box"
+          group="1" contype="0" conaffinity="0" rgba="0.22 0.22 0.22 1"/>
+        <geom name="rim_right" pos="-0.051 0 0.019" size="0.001 0.121 0.003" type="box"
+          group="1" contype="0" conaffinity="0" rgba="0.22 0.22 0.22 1"/>
+        <geom name="rim_front" pos="0  0.121 0.019" size="0.052 0.001 0.003" type="box"
+          group="1" contype="0" conaffinity="0" rgba="0.22 0.22 0.22 1"/>
+        <geom name="rim_rear"  pos="0 -0.121 0.019" size="0.052 0.001 0.003" type="box"
+          group="1" contype="0" conaffinity="0" rgba="0.22 0.22 0.22 1"/>
+
+        <!-- Wheels -->
+        <geom name="wheel_fl" fromto=" 0.050 0.090 0.008  0.062 0.090 0.008" size="0.012"
+          type="cylinder" group="1" contype="0" conaffinity="0" rgba="0.12 0.12 0.12 1"/>
+        <geom name="wheel_fr" fromto="-0.050 0.090 0.008 -0.062 0.090 0.008" size="0.012"
+          type="cylinder" group="1" contype="0" conaffinity="0" rgba="0.12 0.12 0.12 1"/>
+        <geom name="wheel_rl" fromto=" 0.050 -0.090 0.008  0.062 -0.090 0.008" size="0.012"
+          type="cylinder" group="1" contype="0" conaffinity="0" rgba="0.12 0.12 0.12 1"/>
+        <geom name="wheel_rr" fromto="-0.050 -0.090 0.008 -0.062 -0.090 0.008" size="0.012"
+          type="cylinder" group="1" contype="0" conaffinity="0" rgba="0.12 0.12 0.12 1"/>
+
+      </body>
+
+      <site name="bottom_site"            pos="0 0 0"     rgba="0 0 0 0" size="0.005"/>
+      <site name="top_site"               pos="0 0 0.203" rgba="0 0 0 0" size="0.005"/>
+      <site name="horizontal_radius_site" pos="0 0.12 0"  rgba="0 0 0 0" size="0.003"/>
+
+    </body>
+  </worldbody>
+</mujoco>

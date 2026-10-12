@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="LoopAct is a personal robotics engineering project for visual-feedback action control, with six simulation comparisons.">
+  <meta name="theme-color" content="#f8f9fc">
+  <meta property="og:title" content="LoopAct — Personal Robotics Project">
+  <meta property="og:description" content="A visual feedback interface for responsive robot action chunks. Six simulation comparisons, project documentation and code.">
+  <meta property="og:image" content="https://zxyzhk.github.io/LoopAct/assets/posters/redtoy_s.jpg">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <title>LoopAct | Personal Robotics Project</title>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#simulations">Skip to simulations</a>
+  <header class="site-header"><nav class="container nav" aria-label="Main navigation">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">↻</span>LoopAct</a>
+    <div class="nav-links"><a href="#simulations">Simulations</a><a href="#method">Method</a><a href="#results">Project work</a><a class="nav-code" href="https://github.com/zxyzhk/LoopAct" target="_blank" rel="noopener">Code ↗</a></div>
+  </nav></header>
+  <main id="top">
+    <section class="container hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="status-dot"></span> Personal project · Robot manipulation</div>
+        <h1>LoopAct<span class="title-dot">.</span></h1>
+        <p class="paper-title">Visual feedback for<br class="desktop-break"> responsive robot actions</p>
+        <p class="hero-summary">Plan an action chunk.<br>Keep responding as the world changes.</p>
+        <p class="authors">Maintained by 卓星晔 · zxyzhk</p><p class="affiliations">Visual-feedback action control and engineering exploration</p>
+        <div class="hero-actions"><a class="button primary" href="#simulations">Explore the simulations <span>↓</span></a><a class="button secondary" href="https://github.com/zxyzhk/LoopAct" target="_blank" rel="noopener">Explore the code ↗</a></div>
+      </div>
+      <figure class="hero-visual"><div class="visual-heading"><span>REAL-TIME ACTION REFINEMENT</span><span class="live-label">● Simulation</span></div><img src="assets/posters/redtoy_s.jpg" alt="A simulated robot reaching for a moving red toy" fetchpriority="high"><figcaption><span>Observe</span><span aria-hidden="true">→</span><span>Refine</span><span aria-hidden="true">→</span><span>Act</span><span class="frame-label">Every control step</span></figcaption></figure>
+    </section>
+    <section class="container metrics" aria-label="Project features"><div><strong>6</strong><p>Simulation tasks in the showcase</p></div><div><strong>12</strong><p>Original comparison clips</p></div><div><strong>6</strong><p>Implementation components</p></div><p class="metric-source">Explore action planning, visual refinement and cached execution.</p></section>
+
+    <section class="section container" id="simulations">
+      <div class="section-header"><div><p class="eyebrow">01 / THE DEMONSTRATIONS</p><h2>Same task. Different feedback.</h2></div><p>Six tasks. Twelve original clips.<br>Select a task, then start both videos together.</p></div>
+      <div class="task-filters" role="group" aria-label="Filter simulation tasks"><button class="filter active" data-filter="all" aria-pressed="true">All tasks <span>6</span></button><button class="filter" data-filter="dynamic" aria-pressed="false">Dynamic manipulation</button><button class="filter" data-filter="unseen" aria-pressed="false">Unseen generalization</button></div>
+      <div class="task-tabs" role="tablist" aria-label="Simulation task" id="task-tabs"></div>
+      <div class="comparison" id="comparison" role="tabpanel" aria-labelledby="task-redtoy">
+        <div class="comparison-heading"><div><span class="task-category" id="task-category">DYNAMIC MANIPULATION</span><h3 id="task-title">1D Moving Robot</h3><p id="task-description">The target moves along one axis while the robot attempts to catch and lift it.</p></div><span class="task-index" id="task-index">01 / 06</span></div>
+        <div class="video-pair">
+          <article class="video-panel ours"><div class="video-title"><span><i></i> LoopAct</span><small>Visual feedback</small></div><video id="ours-video" controls playsinline muted preload="metadata" aria-label="LoopAct demonstration"></video><a class="download-link" id="ours-download" download>Download original clip ↓</a></article>
+          <article class="video-panel baseline"><div class="video-title"><span><i></i> GR00T</span><small>Open-loop baseline</small></div><video id="baseline-video" controls playsinline muted preload="metadata" aria-label="GR00T baseline demonstration"></video><a class="download-link" id="baseline-download" download>Download original clip ↓</a></article>
+        </div>
+        <div class="playback-bar"><div><button id="play-both" class="button primary small" type="button">▶ Play both</button><button id="restart" class="button secondary small" type="button">↻ Restart</button></div><p id="playback-status" role="status" aria-live="polite">Start together. Each clip keeps its original timing.</p></div>
+      </div>
+      <p class="source-note">These are the original <a href="https://vla-feedback.github.io/" target="_blank" rel="noopener">VLA-Feedback demonstrations</a>. The clips are provided by the upstream project. Clip durations differ; they are not time-normalized.</p>
+      <noscript><p>JavaScript is required for the task selector. <a href="assets/video_sources.json">Open the full video source list</a>, or <a href="https://github.com/zxyzhk/LoopAct/tree/main/docs/assets/videos">browse all 12 clips</a>.</p></noscript>
+    </section>
+
+    <section class="method-section" id="method"><div class="container section">
+      <div class="section-header"><div><p class="eyebrow">02 / THE METHOD</p><h2>A slow plan.<br>A fast visual correction.</h2></div><p>The final denoising transition becomes a feedback interface, so each action can incorporate the latest observation without rerunning the full planner.</p></div>
+      <div class="method-flow"><article><span class="step-number">01</span><h3>Propose</h3><span class="module-chip">VLM + APP</span><p>A vision-language backbone and the Action Proposal Planner generate a near-final action chunk.</p></article><article><span class="step-number">02</span><h3>Reuse</h3><span class="module-chip">ACE + ACC</span><p>Action-side representations are encoded once and retained in the Action Context Cache.</p></article><article><span class="step-number">03</span><h3>Refine</h3><span class="module-chip">VRN · VOE · CMFB</span><p>Current visual observations are fused with cached action features to complete the final denoising update.</p></article></div>
+      <details class="architecture" open><summary><span>Explore the architecture</span><span aria-hidden="true">+</span></summary><a href="assets/architecture.pdf" target="_blank" rel="noopener" aria-label="Open the full-resolution architecture figure"><img src="assets/architecture.png" alt="LoopAct architecture: VLM and APP planning, cached action features, VOE visual encoding and CMFB attention inside VRN" loading="lazy"></a><p>APP: Action Proposal Planner · VRN: Visual Refinement Network · ACE: Action Context Encoder · VOE: Visual Observation Encoder · CMFB: Cross-Modal Fusion Block · ACC: Action Context Cache.</p></details>
+    </div></section>
+
+    <section class="section container results" id="results"><div class="section-header"><div><p class="eyebrow">03 / PERSONAL PROJECT WORK</p><h2>From source code to a usable project.</h2></div><p>Action planning, visual feedback and a browsable simulation showcase.</p></div><div class="method-flow"><article><span class="step-number">01</span><h3>Organize</h3><p>Use APP, VRN, ACE, VOE, CMFB and ACC to organize action planning, visual refinement and feature caching.</p></article><article><span class="step-number">02</span><h3>Preserve</h3><p>Reuse cached action features across feedback steps. Keep model serialization and execution interfaces consistent.</p></article><article><span class="step-number">03</span><h3>Present</h3><p>Build six task comparisons with paired playback, video downloads and responsive desktop and mobile layouts.</p></article></div><p class="table-note">The underlying model and original demonstration clips come from VLA-Feedback. This project documents implementation changes; it does not claim new training or robot evaluation results.</p></section>
+
+    <section class="container resources" id="resources"><div><p class="eyebrow">CODE & DOCUMENTATION</p><h2>Explore the project.</h2><p>Browse the source code and setup instructions.</p></div><div><a class="button primary" href="https://github.com/zxyzhk/LoopAct" target="_blank" rel="noopener">GitHub repository ↗</a></div></section>
+    
+  </main>
+  <footer class="container footer"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">↻</span>LoopAct</a><div><p>Personal project maintained by 卓星晔 (zxyzhk), based on <a href="https://vla-feedback.github.io/" target="_blank" rel="noopener">VLA-Feedback</a>; upstream code and demonstration attribution are retained.</p><p>Original media: Yiheng Ji, Xingru Zhou, Luis Sentis and Mingyo Seo · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> as linked by the source website · <a href="assets/video_sources.json">Video provenance</a> · <a href="https://github.com/zxyzhk/LoopAct/blob/main/LICENSE">Code license</a></p></div></footer>
+</body>
+</html>

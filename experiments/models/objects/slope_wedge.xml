@@ -1,0 +1,63 @@
+<mujoco model="slope_wedge">
+  <!--
+    Triangular wedge / ramp object.
+
+    Shape: A triangular prism (wedge) defined by 6 vertices.
+    MuJoCo computes the convex hull automatically.
+
+    Cross-section (viewed from the side, along Y axis):
+
+        high end (+X)
+           /|
+          / |  H = 0.08m
+         /  |
+        /___|
+    low end    L = 0.30m
+
+    Vertices layout (6 corners of the triangular prism):
+      Low end  (z=0):  (-L/2, +/-W/2, 0)
+      High end (z=0):  (+L/2, +/-W/2, 0)
+      High end (z=H):  (+L/2, +/-W/2, H)
+
+    Dimensions:
+      Length (X): 0.30m  (half = 0.15)
+      Width  (Y): 0.20m  (half = 0.10)
+      Height (Z): 0.08m  (~15 degree slope angle)
+
+    To change the slope angle, adjust the height H:
+      H = Length * tan(angle)
+      e.g. 15 deg: H = 0.30 * tan(15) = 0.080
+           30 deg: H = 0.30 * tan(30) = 0.173
+  -->
+
+  <asset>
+    <!-- Mesh: list vertices, MuJoCo computes the convex hull -->
+    <mesh name="slope_wedge_mesh" vertex="
+      -0.15 -0.10 0.0
+      -0.15  0.10 0.0
+       0.15 -0.10 0.0
+       0.15  0.10 0.0
+       0.15 -0.10 0.08
+       0.15  0.10 0.08
+    "/>
+    <material name="MatSlope" rgba="0.72 0.53 0.35 1"/>
+  </asset>
+
+  <worldbody>
+    <body>
+      <body name="object">
+        <inertial pos="0 0 0.02" mass="5.0" diaginertia="0.1 0.1 0.1"/>
+        <site name="origin" pos="0 0 0" rgba="0 0 0 0" size="0.005"/>
+        <!-- Collision geom (group 0) - for physics -->
+        <geom name="slope_collision" type="mesh" mesh="slope_wedge_mesh"
+              group="0" friction="0.8 0.01 0.001"/>
+        <!-- Visual geom (group 1) - for rendering -->
+        <geom name="slope_visual" type="mesh" mesh="slope_wedge_mesh"
+              group="1" contype="0" conaffinity="0" material="MatSlope"/>
+      </body>
+      <site name="bottom_site" pos="-0.15 0 0" rgba="0 0 0 0" size="0.005"/>
+      <site name="top_site" pos="0.15 0 0.08" rgba="0 0 0 0" size="0.005"/>
+      <site name="horizontal_radius_site" pos="0 0 0" rgba="0 0 0 0" size="0.003"/>
+    </body>
+  </worldbody>
+</mujoco>

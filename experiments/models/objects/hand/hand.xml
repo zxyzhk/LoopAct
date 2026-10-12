@@ -1,0 +1,142 @@
+<mujoco model="inspire_hand">
+    <asset>
+        <mesh name="r_palm_vis" file="meshes/inspire_hands/rh_base_link.STL"/>
+        <mesh name="r_palm_col" file="meshes/inspire_hands/rh_base_link.STL"/>
+
+        <mesh name="r_thumb_proximal_1_vis" file="meshes/inspire_hands/rh_Link11.STL"/>
+        <mesh name="r_thumb_proximal_1_col" file="meshes/inspire_hands/rh_Link11.STL"/>
+
+        <mesh name="r_thumb_proximal_2_vis" file="meshes/inspire_hands/rh_Link12.STL"/>
+        <mesh name="r_thumb_proximal_2_col" file="meshes/inspire_hands/rh_Link12.STL"/>
+
+        <mesh name="r_thumb_middle_vis" file="meshes/inspire_hands/rh_Link13.STL"/>
+        <mesh name="r_thumb_middle_col" file="meshes/inspire_hands/rh_Link13.STL"/>
+
+        <mesh name="r_thumb_distal_vis" file="meshes/inspire_hands/rh_Link14.STL"/>
+        <mesh name="r_thumb_distal_col" file="meshes/inspire_hands/rh_Link14.STL"/>
+
+        <mesh name="r_index_proximal_vis" file="meshes/inspire_hands/rh_Link15.STL"/>
+        <mesh name="r_index_proximal_col" file="meshes/inspire_hands/rh_Link15.STL"/>
+
+        <mesh name="r_index_distal_vis" file="meshes/inspire_hands/rh_Link16.STL"/>
+        <mesh name="r_index_distal_col" file="meshes/inspire_hands/rh_Link16.STL"/>
+
+        <mesh name="r_middle_proximal_vis" file="meshes/inspire_hands/rh_Link17.STL"/>
+        <mesh name="r_middle_proximal_col" file="meshes/inspire_hands/rh_Link17.STL"/>
+
+        <mesh name="r_middle_distal_vis" file="meshes/inspire_hands/rh_Link18.STL"/>
+        <mesh name="r_middle_distal_col" file="meshes/inspire_hands/rh_Link18.STL"/>
+
+        <mesh name="r_ring_proximal_vis" file="meshes/inspire_hands/rh_Link19.STL"/>
+        <mesh name="r_ring_proximal_col" file="meshes/inspire_hands/rh_Link19.STL"/>
+
+        <mesh name="r_ring_distal_vis" file="meshes/inspire_hands/rh_Link20.STL"/>
+        <mesh name="r_ring_distal_col" file="meshes/inspire_hands/rh_Link20.STL"/>
+
+        <mesh name="r_pinky_proximal_vis" file="meshes/inspire_hands/rh_Link21.STL"/>
+        <mesh name="r_pinky_proximal_col" file="meshes/inspire_hands/rh_Link21.STL"/>
+
+        <mesh name="r_pinky_distal_vis" file="meshes/inspire_hands/rh_Link22.STL"/>
+        <mesh name="r_pinky_distal_col" file="meshes/inspire_hands/rh_Link22.STL"/>
+
+        <material name="r_base_material" rgba="0.15 0.15 0.15 1"/>
+        <material name="r_thumb_material" rgba="0.15 0.15 0.15 1"/>
+        <material name="r_index_material" rgba="0.15 0.15 0.15 1"/>
+        <material name="r_middle_material" rgba="0.15 0.15 0.15 1"/>
+        <material name="r_ring_material" rgba="0.15 0.15 0.15 1"/>
+        <material name="r_pinky_material" rgba="0.15 0.15 0.15 1"/>
+        <material name="r_thumb_distal_material" rgba="0.15 0.15 0.15 1"/>
+    </asset>
+
+    <worldbody>
+        <body>
+            <body name="object" gravcomp="1">
+                <inertial mass="0.5" pos="0 -0.05 0" diaginertia="0.001 0.001 0.001"/>
+
+                <!-- Palm -->
+                <body name="r_palm" pos="0 0 0" gravcomp="1">
+                    <geom name="r_palm_vis" type="mesh" mesh="r_palm_vis" material="r_base_material" group="1" contype="0" conaffinity="0"/>
+                    <geom name="r_palm_col" type="mesh" mesh="r_palm_col" mass="0.1" group="0" rgba="0 0 0 0"/>
+
+                    <!-- Thumb (rigid, no joints) -->
+                    <body name="r_thumb" pos="0 0 0">
+                        <body name="r_thumb_proximal_1" pos="-0.01496 -0.0375 -0.02045" quat="0.5 0.5 -0.5 0.5" gravcomp="1">
+                            <geom name="r_thumb_proximal_vis" type="mesh" mesh="r_thumb_proximal_1_vis" material="r_thumb_material" group="1" contype="0" conaffinity="0"/>
+                            <geom name="r_thumb_proximal_col" type="mesh" mesh="r_thumb_proximal_1_col" mass="0.01" group="0" rgba="0 0 0 0"/>
+
+                            <body name="r_thumb_proximal_2" pos="-0.0088099 0.010892 -0.00925" quat="0.1 0.1 0.7 0.7" gravcomp="1">
+                                <geom name="r_thumb_proximal_2_vis" type="mesh" mesh="r_thumb_proximal_2_vis" material="r_thumb_material" group="1" contype="0" conaffinity="0"/>
+                                <geom name="r_thumb_proximal_2_col" type="mesh" mesh="r_thumb_proximal_2_col" mass="0.01" group="0" rgba="0 0 0 0"/>
+
+                                <body name="r_thumb_middle" pos="0.04407 0.034553 -0.0008" quat="1 0 0 0" gravcomp="1">
+                                    <geom name="r_thumb_middle_vis" type="mesh" mesh="r_thumb_middle_vis" material="r_thumb_material" group="1" contype="0" conaffinity="0"/>
+                                    <geom name="r_thumb_middle_col" type="mesh" mesh="r_thumb_middle_col" mass="0.01" group="0" rgba="0 0 0 0"/>
+
+                                    <body name="r_thumb_distal" pos="0.020248 0.010156 -0.0012" quat="1 0 0 0" gravcomp="1">
+                                        <geom name="r_thumb_distal_vis" type="mesh" mesh="r_thumb_distal_vis" material="r_thumb_distal_material" group="1" contype="0" conaffinity="0"/>
+                                        <geom name="r_thumb_distal_col" type="mesh" mesh="r_thumb_distal_col" mass="0.01" group="0" rgba="0 0 0 0"/>
+                                    </body>
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+
+                    <!-- Index finger (rigid, no joints) -->
+                    <body name="r_index" pos="0 0 0">
+                        <body name="r_index_proximal" pos="0.0022853 -0.10493 -0.032268" quat="0.01745 -0.99985 0.0 0.0" gravcomp="1">
+                            <geom name="r_index_proximal_vis" type="mesh" mesh="r_index_proximal_vis" material="r_index_material" group="1" contype="0" conaffinity="0"/>
+                            <geom name="r_index_proximal_col" type="mesh" mesh="r_index_proximal_col" mass="0.01" group="0" rgba="0 0 0 0"/>
+
+                            <body name="r_index_distal" pos="-0.0026138 0.032026 -0.001" quat="1 0 0 0" gravcomp="1">
+                                <geom name="r_index_distal_vis" type="mesh" mesh="r_index_distal_vis" material="r_index_material" group="1" contype="0" conaffinity="0"/>
+                                <geom name="r_index_distal_col" type="mesh" mesh="r_index_distal_col" mass="0.01" group="0" rgba="0 0 0 0"/>
+                            </body>
+                        </body>
+                    </body>
+
+                    <!-- Middle finger (rigid, no joints) -->
+                    <body name="r_middle" pos="0 0 0">
+                        <body name="r_middle_proximal" pos="0.0022853 -0.1055 -0.01295" quat="0 -1 0.0 0.0" gravcomp="1">
+                            <geom name="r_middle_proximal_vis" type="mesh" mesh="r_middle_proximal_vis" material="r_middle_material" group="1" contype="0" conaffinity="0"/>
+                            <geom name="r_middle_proximal_col" type="mesh" mesh="r_middle_proximal_col" mass="0.01" group="0" rgba="0 0 0 0"/>
+
+                            <body name="r_middle_distal" pos="-0.0024229 0.032041 -0.001" quat="1 0 0 0" gravcomp="1">
+                                <geom name="r_middle_distal_vis" type="mesh" mesh="r_middle_distal_vis" material="r_middle_material" group="1" contype="0" conaffinity="0"/>
+                                <geom name="r_middle_distal_col" type="mesh" mesh="r_middle_distal_col" mass="0.01" group="0" rgba="0 0 0 0"/>
+                            </body>
+                        </body>
+                    </body>
+
+                    <!-- Ring finger (rigid, no joints) -->
+                    <body name="r_ring" pos="0 0 0">
+                        <body name="r_ring_proximal" pos="0.0022853 -0.10531 0.0062872" quat="0.02619 0.99966 0.0 0.0" gravcomp="1">
+                            <geom name="r_ring_proximal_vis" type="mesh" mesh="r_ring_proximal_vis" material="r_ring_material" group="1" contype="0" conaffinity="0"/>
+                            <geom name="r_ring_proximal_col" type="mesh" mesh="r_ring_proximal_col" mass="0.01" group="0" rgba="0 0 0 0"/>
+
+                            <body name="r_ring_distal" pos="-0.0024229 0.032041 -0.001" quat="1 0 0 0" gravcomp="1">
+                                <geom name="r_ring_distal_vis" type="mesh" mesh="r_ring_distal_vis" material="r_ring_material" group="1" contype="0" conaffinity="0"/>
+                                <geom name="r_ring_distal_col" type="mesh" mesh="r_ring_distal_col" mass="0.01" group="0" rgba="0 0 0 0"/>
+                            </body>
+                        </body>
+                    </body>
+
+                    <!-- Pinky finger (rigid, no joints) -->
+                    <body name="r_pinky" pos="0 0 0">
+                        <body name="r_pinky_proximal" pos="0.0022853 -0.10411 0.025488" quat="0.05232 0.99863 0.0 0.0" gravcomp="1">
+                            <geom name="r_pinky_proximal_vis" type="mesh" mesh="r_pinky_proximal_vis" material="r_pinky_material" group="1" contype="0" conaffinity="0"/>
+                            <geom name="r_pinky_proximal_col" type="mesh" mesh="r_pinky_proximal_col" mass="0.01" group="0" rgba="0 0 0 0"/>
+
+                            <body name="r_pinky_distal" pos="-0.0024229 0.032041 -0.001" quat="1 0 0 0" gravcomp="1">
+                                <geom name="r_pinky_distal_vis" type="mesh" mesh="r_pinky_distal_vis" material="r_pinky_material" group="1" contype="0" conaffinity="0"/>
+                                <geom name="r_pinky_distal_col" type="mesh" mesh="r_pinky_distal_col" mass="0.01" group="0" rgba="0 0 0 0"/>
+                            </body>
+                        </body>
+                    </body>
+
+                </body>
+                <!-- End of Palm -->
+            </body>
+        </body>
+    </worldbody>
+
+</mujoco>

@@ -1,0 +1,98 @@
+# Checkpoints and model outputs
+checkpoints/
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+*.bin
+*.h5
+*.pkl
+
+# Datasets (add specific dataset paths as needed)
+datasets/
+demo_data/
+experiments/demo_data/
+third_party/Isaac-GR00T/demo_data/
+*.hdf5
+
+# Experiment outputs (LIBERO, Robosuite, etc.)
+experiments/**/run_data/
+experiments/**/videos/
+experiments/**/videos_*/
+**/run_videos/
+*.parquet
+*.mp4
+*.avi
+*.mkv
+
+# Weights & Biases
+wandb/
+*.wandb
+
+# Local analysis scratch
+analysis/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE / assistant tooling
+.vscode/
+.idea/
+.claude/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Cache
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# HuggingFace cache (optional - uncomment if you want to ignore HF cache)
+# .hf_cache/
+# ~/.cache/huggingface/
+
+# SLURM
+slurm-*.out
+*.out
+
+# Other
+*.swp
+*.swo
+core.*
+
+
+# Public paper demonstration clips
+!docs/assets/videos/*.mp4
