@@ -1,5 +1,11 @@
 {
   "source_page": "https://vla-feedback.github.io/",
+  "attribution": {
+    "creators": ["Yiheng Ji", "Xingru Zhou", "Luis Sentis", "Mingyo Seo"],
+    "license": "CC BY-SA 4.0 (as linked by the source website)",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "modifications": "Original video files are distributed unchanged."
+  },
   "retrieved_date": "2026-10-12",
   "video_count": 12,
   "videos": [
